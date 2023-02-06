@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>User Registration</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class = 'p-4 m-4'>
+        <div class = 'col-lg-5 mx-auto border rounded pt-4'>
+            <!--TO Create Outer Box-->
+            <h3 class="alert alert-light border rounded ">Login</h3>
+
+            <!--Signin Form-->
+            <form action="/login/" method="post" autocomplete="off">
+                {% csrf_token %}
+
+                {% if error %}
+                <div class="alert alert-danger border rounded">{{error}}</div>
+                {% endif %}
+       
+                <!--email-->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" name="email" placeholder="Enter Your Email" class="form-control form-control-sm" required>
+                </div>
+
+                <!--Password-->
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" name="password" placeholder="Enter Password" class="form-control form-control-sm" required>
+                </div>
+
+                <!--Submit Button-->
+                <button type="submit" href="{% url 'home_url' %}" class="btn btn-primary">Login</button>
+
+                <!--Signing for existing user-->
+                <div class="mt-2">
+                    <p>Not an User? <a href="{% url 'signup_url' %}">Click Here</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

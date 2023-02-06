@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load countries %}
+{% get_countries as countries %}
+
+{% block title %}
+    <title>User Registration</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class = 'p-4 m-4'>
+        <div class = 'col-lg-5 mx-auto border rounded pt-4'>
+
+            <h3 class="alert alert-light border rounded">Create An Account</h3>
+            
+            
+            <form action="/signup/" method="post" autocomplete="off">
+                {% csrf_token %}
+
+                {% if error %}
+                <div class="alert alert-danger border rounded">{{error}}</div>
+                {% endif %}
+
+                <!--Enter First Name-->
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" name="first_name" value="{{values.first_name}}" 
+                    class="form-control form-control-sm"  placeholder="Enter Your First name" required>
+                </div>
+
+                <!--Enter Last Name-->
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" name="last_name" value="{{values.last_name}}" 
+                    placeholder="Enter Your last name" class="form-control form-control-sm"  required>
+                </div>
+
+                <!--Phone-->
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" name="phone" placeholder="Enter Your 10 digit number" 
+                    class="form-control form-control-sm" value="{{values.phone}}" required>
+                </div>
+
+                <!--email-->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" name="email" placeholder="Enter Your Email" 
+                    class="form-control form-control-sm" value="{{values.email}}" required>
+                </div>
+
+                <!--Password-->
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" name="password" placeholder="Enter Password" 
+                    class="form-control form-control-sm" value="{{values.password}}" required>
+                </div>
+
+                <!--Submit Button-->
+                <button type="submit" href="{% url 'home_url' %}" class="btn btn-primary">Create An Account</button>
+                
+                <!--Signing for existing user-->
+                <div class="mt-2">
+                <p>Already an User? <a href="{% url 'login_url' %}">Click Here</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
